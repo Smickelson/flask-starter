@@ -26,11 +26,13 @@ class DefaultConfig(BaseConfig):
     DEBUG = True
 
     # Flask-Sqlalchemy
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True   # False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # SQLITE for production
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + INSTANCE_FOLDER_PATH + '/db.sqlite'
+#    SQLALCHEMY_DATABASE_URI = 'sqlite:///tmp/db.sqlite'
+    DB_FILE = os.path.join(INSTANCE_FOLDER_PATH, 'db.sqlite')
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{DB_FILE}'
 
     # POSTGRESQL for production
     # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:pass@ip/dbname'
@@ -40,12 +42,16 @@ class DefaultConfig(BaseConfig):
     CACHE_DEFAULT_TIMEOUT = 60
 
     # Flask-mail
-    MAIL_DEBUG = False
-    MAIL_SERVER = ""  # something like 'smtp.gmail.com'
-    MAIL_PORT = 587
+    MAIL_DEBUG = True  # False
+    MAIL_SERVER = 'sandbox.smtp.mailtrap.io'
+    MAIL_PORT = 2525
+    MAIL_USERNAME = '0237fa7e26adbe'
+    MAIL_PASSWORD = '********4650'
     MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_DEFAULT_SENDER = 'noreply@yourdomain.com'
 
     # Keep these in instance folder or in env variables
-    MAIL_USERNAME = "admin-mail@yourdomain-flaskstarter.domain"
-    MAIL_PASSWORD = ""
+    MAIL_USERNAME = "Stratasyslab@gmail.com"
+    MAIL_PASSWORD = "urcshsgdiwlainsu"  # Use App Password, not regular password
     MAIL_DEFAULT_SENDER = MAIL_USERNAME

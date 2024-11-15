@@ -1,0 +1,68 @@
+Flask Start - SDM notes
+
+1) it didn't run at first so I changed a bunch of packages and created a new requirements.txt
+2) I changed to windows type paths for the database file which in in the /instance directory
+3) It was designed for a linux file system but now works on windows.
+4) Consider "code ." to use the Ubuntu linux in VS Code. It deploys in a linux container anyway.
+
+
+VS Code:
+F5 - brings up debugger controls
+
+
+Which Python environment is active:
+
+where python - returns nothing in powershell. That's because of aliasing feature of PS. 
+
+Use this:
+C:\Windows\System32\where.exe python - shows all the python installations I think
+
+python -c "import sys; print(sys.executable)" - this tells you exactly which python you are using
+
+Activating virtual environment:
+
+python -m venv .venv     - Create a new virtual environment named .venv
+
+In VS Code upper right you select the kernel. Verify with above commands.
+
+The terminal should be prefixed with (.venv) for a local virtual environment. If not activate it:
+
+.\.venv\Scripts\activate
+
+Verify:
+python -c "import sys; print(sys.executable)" 
+
+Setting up the environment:
+
+Pip list - get all the packages installed
+Pip install MyPackage - install particular package
+
+Requirements.txt:
+
+Make a requirement.txt file. Example for Sam's image code:
+
+numpy
+tensorflow
+Pillow
+matplotlib
+keras
+scikit-learn
+
+Make requirements.txt file:
+
+pip freeze > requirements.txt
+
+Then install all at once:
+
+pip install -r requirements.txt
+
+Docker:
+
+To run the docker and mount the external directory containing the models launch this from the Python prompt.
+
+1) Build the image
+Right click on the Dockerfile or type: docker build --no-cache -t inferenceengine .
+
+2) Run
+docker run -v "C:/OneDrive/OneDrive - Stratasys Inc/grid method/models/v3:/app/models" -p 53752:53752 inferenceengine 
+
